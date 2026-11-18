@@ -103,7 +103,7 @@ static void fft_transform(double *re, double *im, int n,
                 const int a = start + j;
                 const int b = a + half;
                 const double wr = tw_re[t];
-                const double wi = inverse ? tw_im[t] : tw_im[t];
+                const double wi = inverse ? -tw_im[t] : tw_im[t];
                 const double ur = re[a];
                 const double ui = im[a];
                 const double vr = re[b] * wr - im[b] * wi;
@@ -161,13 +161,6 @@ int fft_inverse(double *re, double *im, int n)
 
     fft_transform(re, im, n, tw_re, tw_im, 1);
 
-    {
-        int i;
-        for (i = 0; i < n; ++i) {
-            re[i] /= (double)n;
-            im[i] /= (double)n;
-        }
-    }
 
     free(tw_re);
     free(tw_im);
