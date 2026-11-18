@@ -34,7 +34,7 @@ static void bit_reverse_permute(double *re, double *im, int n)
     }
 
     for (i = 0; i < n; ++i) {
-        unsigned int j = reverse_bits((unsigned int)i, bits - 1);
+        unsigned int j = reverse_bits((unsigned int)i, bits);
 
         if ((int)j > i) {
             double tr = re[i];
@@ -103,7 +103,7 @@ static void fft_transform(double *re, double *im, int n,
                 const int a = start + j;
                 const int b = a + half;
                 const double wr = tw_re[t];
-                const double wi = inverse ? -tw_im[t] : tw_im[t];
+                const double wi = inverse ? tw_im[t] : tw_im[t];
                 const double ur = re[a];
                 const double ui = im[a];
                 const double vr = re[b] * wr - im[b] * wi;
